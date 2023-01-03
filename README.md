@@ -1,2 +1,3 @@
-# ASD_AGH
-Algorithms and Data Structures AGH course 2021/2022
+# ASD
+
+Rozwiązania do kursu Algorytmów i Struktur Danych - Informatyka 2021/2022
