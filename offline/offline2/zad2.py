@@ -30,20 +30,34 @@ def partition(A, p, r):
 
 
 def depth(L):
-    new_array = []
+    result = 0 
+    quick_sort(L, 0, len(L) - 1)
+    i = 0
 
-    for x,y in L:
-        new_array.append((x,1))
-        new_array.append((y,-1))
-    
-    quick_sort(new_array, 0, len(new_array)-1)
+    L2 = []
 
-    result = 0
-    actual_value = 0
+    while i < len(L):
+        j = i + 1
+        act = 0
+        max_value = L[i][1]
+        while j < len(L) and L[i][0] == L[j][0]:
+            max_value = max(max_value, L[j][1])
+            j += 1
+            act += 1
+        L2.append((L[i][0], max_value, act))
+        i = j 
+
+    print(L2)
+
+
+    while i < len(L):
+        act = 0
+        j = i 
+
+        while j = i + 1
     
-    for i in range(0, len(new_array)-1):
-        actual_value += new_array[i][1] 
-        result = max(result, actual_value)
+
+    
 
     return result
     
