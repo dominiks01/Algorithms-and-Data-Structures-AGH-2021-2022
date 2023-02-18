@@ -1,10 +1,10 @@
-# Bucket-Sort z zaimplementowanym quick-sortem 
+# Bucket-Sort z zaimplementowanym quick-sortem i insertion_sortem 
+# Index elementu wyznaczany jest ze wzoru (X - min)*Ilość bucketów / (różnica wartości elementu największego i najmniejszego)
+# Rozwiązanie nie używa prawdopodobieństwa 
 
-# Alogytm do poprawy, nie korzysta z opisu przedziałów 
+# Złożoność czasowa O(n^2)
 
 from zad3testy import runtests
-from random import randint
-
 
 def insertion_sort(arr):
     for i in range(len(arr)-1):
@@ -16,19 +16,23 @@ def insertion_sort(arr):
    
 
 def bucket_sort(P, T):
-    result = [[] for _ in range(len(P))]
+    maxElement  = max(P)
+    minElement = min(P)
+    n = len(P)//10
+    result = [[] for _ in range(n+1)]
 
     for i in range(len(P)):
-        result[int(P[i])].append(P[i])
-    
+        index = (P[i] - minElement) / (maxElement - minElement) * n
+        result[int(index)].append(P[i])
+
+    p_result = []
     for i in result:
         if i is not None:
-            quick_sort(i, 0, len(i)-1)
-    
-    p_result = []
-
-    for i in result:
-        p_result.extend(i)
+            if len(i) >= 10:
+                quick_sort(i, 0, len(i)-1)
+            else:
+                insertion_sort(i)
+            p_result.extend(i)
 
     return p_result 
 

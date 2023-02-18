@@ -1,3 +1,12 @@
+# Rozwiązanie polega na posortowaniu przedziałów względem pierwszej wartości i 
+# siłowym sprawdzaniu wszystkich przedziałów zawartych w aktualnie sprawdzanym przedziale 
+
+# Złożoność O(N**2), gdzie n - liczba przedziałów 
+
+# W celu usprawnienia algorytmu w momencie porównywania przedziałów wybierany jest następny 
+# kandydat na przedział zawierający więcej przedziałów (będzie on pierwszym przedziałem który kończy się dalej od aktualnego)
+
+
 from zad2testy import runtests
 
 def quick_sort(A, p, r):
@@ -30,35 +39,46 @@ def partition(A, p, r):
 
 
 def depth(L):
-    result = 0 
-    quick_sort(L, 0, len(L) - 1)
+    quick_sort(L, 0, len(L)-1)
+    result = 0
     i = 0
-
-    L2 = []
-
-    while i < len(L):
+    act = 0 
+    
+    while i < len(L): 
+        
         j = i + 1
-        act = 0
-        max_value = L[i][1]
-        while j < len(L) and L[i][0] == L[j][0]:
-            max_value = max(max_value, L[j][1])
+        firstToCheck = 0
+
+        while j < len(L) and L[i][1] >= L[j][0]:     
+            if L[i][1] >= L[j][1]:
+                act += 1
+            elif firstToCheck == 0:
+                firstToCheck = j
             j += 1
+
+        if j > len(L):
+            return max(result, act)
+
+        i = firstToCheck
+        result = max(result, act)
+
+        if firstToCheck == 0:
+            break
+
+        act = 0 
+        
+        # Elementy które zaczynają się w tym samym punkcie a które mogą być pomijane przy 
+        # dobieraniu kandydata => Wszystkie elementy które zaczynają się w tym 
+        # samym punkcie co kandydat, są mniejsze od aktualnie sprawdzanego przedziału,
+        # zostały umiejscowione przed kandydatem w posortowanej tablicy 
+        
+        j = firstToCheck - 1 
+        while L[j][0] == L[i][0]:
+            j -= 1 
             act += 1
-        L2.append((L[i][0], max_value, act))
-        i = j 
-
-    print(L2)
-
-
-    while i < len(L):
-        act = 0
-        j = i 
-
-        while j = i + 1
-    
-
-    
-
+            
+        
+        
     return result
     
 

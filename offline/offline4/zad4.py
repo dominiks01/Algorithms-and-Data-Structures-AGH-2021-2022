@@ -1,4 +1,3 @@
-
 # Algorytm Knapsack do znajowania najbardziej korzystnego ustawienia budynków.
 # Sortujemy tablicę względem końca budynku. 
 
@@ -22,7 +21,7 @@ def select_buildings(T,p):
     T = [x[0] for x in T_cpy]
 
     n = len(T)
-    F = [[0 for b in range(p+1)] for i in range(n)]
+    F = [[0 for _ in range(p+1)] for i in range(n)]
 
     for b in range(T[0][3], p+1):
         F[0][b] = (T[0][2] - T[0][1])*T[0][0]
